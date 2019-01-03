@@ -4,7 +4,12 @@ const graphql = require('graphql');
 
 // Destructure function objects
 const {
-  GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLSchema, GraphQLString
+  GraphQLInt,
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLObjectType,
+  GraphQLSchema,
+  GraphQLString
 } = graphql;
 
 // Constants
@@ -72,7 +77,20 @@ const RootQueryType = new GraphQLObjectType({
 
 // Root mutation
 const RootMutationType = new GraphQLObjectType({
-  fields: {},
+  fields: {
+    addUser: {
+      args: {
+        age: { type: new GraphQLNonNull(GraphQLInt) },
+        companyId: { type: GraphQLInt },
+        name: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parentValue, { age, name }) {
+        // Add new user
+        return axios.post(`${BASE_URL}/users`, { age, name }).then(response => response.data);
+      },
+      type: UserType
+    }
+  },
   name: 'RootMutation'
 });
 

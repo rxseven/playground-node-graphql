@@ -2,7 +2,7 @@
   "name": "playground-node-graphql",
   "version": "0.1.0",
   "description": "Node & GraphQL Playground",
-  "main": "index.js",
+  "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git+https://rxseven@github.com/rxseven/playground-node-graphql.git"

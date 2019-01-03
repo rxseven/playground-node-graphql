@@ -1,4 +1,5 @@
 // Import modules
+const axios = require('axios');
 const graphql = require('graphql');
 
 // Destructure function objects
@@ -31,7 +32,16 @@ const UserType = new GraphQLObjectType({
 
 // Root query (starting point)
 const RootQueryType = new GraphQLObjectType({
-  fields: {},
+  fields: {
+    user: {
+      args: { id: { type: GraphQLString } },
+      resolve(parentValue, args) {
+        // Get user by ID
+        return axios.get(`${BASE_URL}/users/${args.id}`).then(response => response.data);
+      },
+      type: UserType
+    }
+  },
   name: 'RootQuery'
 });
 

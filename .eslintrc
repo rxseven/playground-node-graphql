@@ -2,6 +2,7 @@
   "env": {
     "node": true
   },
+  "extends": "airbnb-base",
   "rules": {
     "comma-dangle": "off",
     "no-console": "off"

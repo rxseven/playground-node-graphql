@@ -17,9 +17,7 @@
     "url": "https://github.com/rxseven/playground-node-graphql/issues"
   },
   "homepage": "https://github.com/rxseven/playground-node-graphql#readme",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "devDependencies": {
     "eslint": "^5.11.1",
     "eslint-config-airbnb-base": "^13.1.0",

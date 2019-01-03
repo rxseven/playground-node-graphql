@@ -99,6 +99,19 @@ const RootMutationType = new GraphQLObjectType({
         return axios.delete(`${BASE_URL}/users/${id}`).then(response => response.data);
       },
       type: UserType
+    },
+    editUser: {
+      args: {
+        age: { type: GraphQLInt },
+        companyId: { type: GraphQLString },
+        id: { type: new GraphQLNonNull(GraphQLString) },
+        name: { type: GraphQLString }
+      },
+      resolve(parentValue, args) {
+        // Update user by ID
+        return axios.patch(`${BASE_URL}/users/${args.id}`, args).then(response => response.data);
+      },
+      type: UserType
     }
   },
   name: 'RootMutation'

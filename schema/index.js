@@ -33,6 +33,13 @@ const UserType = new GraphQLObjectType({
 // Root query (starting point)
 const RootQueryType = new GraphQLObjectType({
   fields: {
+    company: {
+      args: { id: { type: GraphQLString } },
+      resolve(parentValue, args) {
+        return axios.get(`${BASE_URL}/companies/${args.id}`).then(response => response.data);
+      },
+      type: CompanyType
+    },
     user: {
       args: { id: { type: GraphQLString } },
       resolve(parentValue, args) {

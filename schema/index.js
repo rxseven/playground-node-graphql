@@ -2,7 +2,9 @@
 const graphql = require('graphql');
 
 // Destructure function objects
-const { GraphQLInt, GraphQLObjectType, GraphQLString } = graphql;
+const {
+  GraphQLInt, GraphQLObjectType, GraphQLSchema, GraphQLString
+} = graphql;
 
 // Constants
 const BASE_URL = 'http://localhost:3000';
@@ -26,3 +28,17 @@ const UserType = new GraphQLObjectType({
   }),
   name: 'User'
 });
+
+// Root query (starting point)
+const RootQueryType = new GraphQLObjectType({
+  fields: {},
+  name: 'RootQuery'
+});
+
+// Create schema
+const schema = new GraphQLSchema({
+  query: RootQueryType
+});
+
+// Export modules
+module.exports = schema;

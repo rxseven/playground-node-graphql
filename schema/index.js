@@ -89,6 +89,16 @@ const RootMutationType = new GraphQLObjectType({
         return axios.post(`${BASE_URL}/users`, { age, name }).then(response => response.data);
       },
       type: UserType
+    },
+    deleteUser: {
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parentValue, { id }) {
+        // Delete user by ID
+        return axios.delete(`${BASE_URL}/users/${id}`).then(response => response.data);
+      },
+      type: UserType
     }
   },
   name: 'RootMutation'

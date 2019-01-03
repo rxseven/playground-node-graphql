@@ -24,6 +24,15 @@ const CompanyType = new GraphQLObjectType({
 const UserType = new GraphQLObjectType({
   fields: () => ({
     age: { type: GraphQLInt },
+    company: {
+      resolve(parentValue) {
+        // Get company by ID
+        return axios
+          .get(`${BASE_URL}/companies/${parentValue.companyId}`)
+          .then(response => response.data);
+      },
+      type: CompanyType
+    },
     id: { type: GraphQLString },
     name: { type: GraphQLString }
   }),

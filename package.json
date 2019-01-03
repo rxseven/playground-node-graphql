@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/rxseven/playground-node-graphql#readme",
   "scripts": {
-    "lint": "eslint \"**/*.js\""
+    "lint": "eslint \"**/*.js\"",
+    "lint:fix": "eslint --fix \"**/*.js\""
   },
   "dependencies": {
     "morgan": "^1.9.1"

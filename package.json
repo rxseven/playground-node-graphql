@@ -1,0 +1,23 @@
+{
+  "name": "playground-node-graphql",
+  "version": "0.1.0",
+  "description": "Node & GraphQL Playground",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://rxseven@github.com/rxseven/playground-node-graphql.git"
+  },
+  "author": {
+    "name": "Theerawat Pongsupawat",
+    "email": "rxseven.com@gmail.com",
+    "url": "http://www.rxseven.com"
+  },
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/rxseven/playground-node-graphql/issues"
+  },
+  "homepage": "https://github.com/rxseven/playground-node-graphql#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

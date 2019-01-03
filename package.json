@@ -21,6 +21,7 @@
     "format": "prettier-eslint --write \"**/*.{js,json}\"",
     "lint": "eslint \"**/*.js\"",
     "lint:fix": "eslint --fix \"**/*.js\"",
+    "serve": "json-server --watch data/db.json",
     "start": "node server.js",
     "start:watch": "nodemon server.js"
   },

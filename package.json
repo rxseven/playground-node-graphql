@@ -21,7 +21,8 @@
     "format": "prettier-eslint --write \"**/*.{js,json}\"",
     "lint": "eslint \"**/*.js\"",
     "lint:fix": "eslint --fix \"**/*.js\"",
-    "start": "node server.js"
+    "start": "node server.js",
+    "start:watch": "nodemon server.js"
   },
   "dependencies": {
     "dotenv": "^6.2.0",

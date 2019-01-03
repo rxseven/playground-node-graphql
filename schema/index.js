@@ -28,6 +28,7 @@ const CompanyType = new GraphQLObjectType({
           .get(`${BASE_URL}/companies/${parentValue.id}/users`)
           .then(response => response.data);
       },
+      // eslint-disable-next-line
       type: new GraphQLList(UserType)
     }
   }),

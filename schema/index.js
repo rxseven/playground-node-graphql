@@ -4,7 +4,7 @@ const graphql = require('graphql');
 
 // Destructure function objects
 const {
-  GraphQLInt, GraphQLObjectType, GraphQLSchema, GraphQLString
+  GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLSchema, GraphQLString
 } = graphql;
 
 // Constants
@@ -15,7 +15,16 @@ const CompanyType = new GraphQLObjectType({
   fields: () => ({
     description: { type: GraphQLString },
     id: { type: GraphQLString },
-    name: { type: GraphQLString }
+    name: { type: GraphQLString },
+    users: {
+      resolve(parentValue) {
+        // Get users by company ID
+        return axios
+          .get(`${BASE_URL}/companies/${parentValue.id}/users`)
+          .then(response => response.data);
+      },
+      type: new GraphQLList(UserType)
+    }
   }),
   name: 'Company'
 });

@@ -52,9 +52,22 @@ async function getUsers({ id }) {
   }
 }
 
+// Update company
+async function updateCompany({ id, ...data }) {
+  try {
+    const response = await axios.patch(`${PATH}/${id}`, data);
+
+    return response.data;
+  } catch (error) {
+    console.log('Error -', error);
+    throw new Error('Something went wrong!');
+  }
+}
+
 module.exports = {
   addCompany,
   deleteCompany,
   getCompany,
-  getUsers
+  getUsers,
+  updateCompany
 };

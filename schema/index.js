@@ -1,6 +1,8 @@
 // Import modules
-const axios = require('axios');
 const graphql = require('graphql');
+
+const companyService = require('../services/company');
+const userService = require('../services/user');
 
 // Destructure function objects
 const {
@@ -12,9 +14,6 @@ const {
   GraphQLString
 } = graphql;
 
-// Constants
-const BASE_URL = 'http://localhost:3000';
-
 // Company type
 const CompanyType = new GraphQLObjectType({
   fields: () => ({
@@ -22,14 +21,8 @@ const CompanyType = new GraphQLObjectType({
     id: { type: GraphQLString },
     name: { type: GraphQLString },
     users: {
-      resolve(parentValue) {
-        // Get users by company ID
-        return axios
-          .get(`${BASE_URL}/companies/${parentValue.id}/users`)
-          .then(response => response.data);
-      },
-      // eslint-disable-next-line
-      type: new GraphQLList(UserType)
+      resolve: ({ id }) => companyService.getUsers({ id }),
+      type: new GraphQLList(UserType) // eslint-disable-line
     }
   }),
   name: 'Company'
@@ -40,12 +33,7 @@ const UserType = new GraphQLObjectType({
   fields: () => ({
     age: { type: GraphQLInt },
     company: {
-      resolve(parentValue) {
-        // Get company by ID
-        return axios
-          .get(`${BASE_URL}/companies/${parentValue.companyId}`)
-          .then(response => response.data);
-      },
+      resolve: ({ companyId }) => companyService.getCompany({ id: companyId }),
       type: CompanyType
     },
     id: { type: GraphQLString },
@@ -59,17 +47,12 @@ const RootQueryType = new GraphQLObjectType({
   fields: {
     company: {
       args: { id: { type: GraphQLString } },
-      resolve(parentValue, args) {
-        return axios.get(`${BASE_URL}/companies/${args.id}`).then(response => response.data);
-      },
+      resolve: (parentValue, { id }) => companyService.getCompany({ id }),
       type: CompanyType
     },
     user: {
       args: { id: { type: GraphQLString } },
-      resolve(parentValue, args) {
-        // Get user by ID
-        return axios.get(`${BASE_URL}/users/${args.id}`).then(response => response.data);
-      },
+      resolve: (parentValue, { id }) => userService.getUser({ id }),
       type: UserType
     }
   },
@@ -82,23 +65,17 @@ const RootMutationType = new GraphQLObjectType({
     addUser: {
       args: {
         age: { type: new GraphQLNonNull(GraphQLInt) },
-        companyId: { type: GraphQLInt },
+        companyId: { type: GraphQLString },
         name: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve(parentValue, { age, name }) {
-        // Add new user
-        return axios.post(`${BASE_URL}/users`, { age, name }).then(response => response.data);
-      },
+      resolve: (parentValue, args) => userService.addUser(args),
       type: UserType
     },
     deleteUser: {
       args: {
         id: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve(parentValue, { id }) {
-        // Delete user by ID
-        return axios.delete(`${BASE_URL}/users/${id}`).then(response => response.data);
-      },
+      resolve: (parentValue, { id }) => userService.deleteUser({ id }),
       type: UserType
     },
     editUser: {
@@ -108,17 +85,14 @@ const RootMutationType = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLString) },
         name: { type: GraphQLString }
       },
-      resolve(parentValue, args) {
-        // Update user by ID
-        return axios.patch(`${BASE_URL}/users/${args.id}`, args).then(response => response.data);
-      },
+      resolve: (parentValue, args) => userService.updateUser(args),
       type: UserType
     }
   },
   name: 'RootMutation'
 });
 
-// Create schema
+// Create GraphQL schema instance
 const schema = new GraphQLSchema({
   mutation: RootMutationType,
   query: RootQueryType

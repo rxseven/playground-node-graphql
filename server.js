@@ -1,13 +1,6 @@
-// Import modules
 const app = require('./app');
 
-// Variables
-const PORT = app.get('port');
+// Bind and listen for connections on the specified host and port
+const server = app.listen(app.get('port'), () => console.log(`Listening on port ${app.get('port')}`));
 
-// Start server
-const server = app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT} in ${app.get('env')} mode`);
-});
-
-// Export modules
 module.exports = server;

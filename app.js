@@ -1,14 +1,14 @@
 const express = require('express');
 const morgan = require('morgan');
 
-// Import route handlers
-const routes = require('./routes');
-
 // Load environment variables
 require('./config/env');
 
 // Load server configuration
 const { PORT } = require('./config/server');
+
+// Import route handlers
+const routes = require('./routes');
 
 // Create Express app
 const app = express();

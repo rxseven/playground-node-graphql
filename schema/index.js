@@ -61,6 +61,14 @@ const RootQueryType = new GraphQLObjectType({
 // Root mutation
 const RootMutationType = new GraphQLObjectType({
   fields: {
+    addCompany: {
+      args: {
+        description: { type: new GraphQLNonNull(GraphQLString) },
+        name: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: (parentValue, args) => companyService.addCompany(args),
+      type: CompanyType
+    },
     addUser: {
       args: {
         age: { type: new GraphQLNonNull(GraphQLInt) },

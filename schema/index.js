@@ -69,6 +69,13 @@ const RootMutationType = new GraphQLObjectType({
       resolve: (parentValue, args) => companyService.addCompany(args),
       type: CompanyType
     },
+    deleteCompany: {
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: (parentValue, { id }) => companyService.deleteCompany({ id }),
+      type: CompanyType
+    },
     addUser: {
       args: {
         age: { type: new GraphQLNonNull(GraphQLInt) },

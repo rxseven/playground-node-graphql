@@ -1,4 +1,3 @@
-// Import modules
 const express = require('express');
 
 // Controllers
@@ -16,5 +15,4 @@ router.use('/graphql', graphQL);
 // Root route
 router.route('/').get(controller);
 
-// Export modules
 module.exports = router;

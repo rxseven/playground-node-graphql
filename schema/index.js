@@ -1,4 +1,3 @@
-// Import modules
 const graphql = require('graphql');
 
 const companyService = require('../services/company');
@@ -98,5 +97,4 @@ const schema = new GraphQLSchema({
   query: RootQueryType
 });
 
-// Export modules
 module.exports = schema;

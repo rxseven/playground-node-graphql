@@ -1,4 +1,3 @@
-// Import modules
 const expressGraphQL = require('express-graphql');
 
 const schema = require('../schema/index');
@@ -8,5 +7,4 @@ const graphQL = expressGraphQL({
   schema
 });
 
-// Export modules
 module.exports = graphQL;

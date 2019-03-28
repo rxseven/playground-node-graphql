@@ -1,7 +1,7 @@
-// Import modules
 const express = require('express');
 const morgan = require('morgan');
 
+// Import route handlers
 const routes = require('./routes');
 
 // Load environment variables
@@ -16,11 +16,10 @@ const app = express();
 // App configuration
 app.set('port', PORT);
 
-// Configure middleware
+// HTTP request logger
 app.use(morgan('dev'));
 
-// Routes
+// Connect index route
 app.use('/', routes);
 
-// Export modules
 module.exports = app;

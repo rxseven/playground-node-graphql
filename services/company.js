@@ -16,6 +16,18 @@ async function addCompany(data) {
   }
 }
 
+// Delete company
+async function deleteCompany({ id }) {
+  try {
+    const response = await axios.delete(`${PATH}/${id}`);
+
+    return response.data;
+  } catch (error) {
+    console.log('Error -', error);
+    throw new Error('Something went wrong!');
+  }
+}
+
 // Get company
 async function getCompany({ id }) {
   try {
@@ -40,4 +52,9 @@ async function getUsers({ id }) {
   }
 }
 
-module.exports = { addCompany, getCompany, getUsers };
+module.exports = {
+  addCompany,
+  deleteCompany,
+  getCompany,
+  getUsers
+};

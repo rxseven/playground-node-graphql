@@ -4,6 +4,18 @@ const { DATA_URL } = require('../config/server');
 
 const PATH = `${DATA_URL}/companies`;
 
+// Add company
+async function addCompany(data) {
+  try {
+    const response = await axios.post(PATH, data);
+
+    return response.data;
+  } catch (error) {
+    console.log('Error -', error);
+    throw new Error('Something went wrong!');
+  }
+}
+
 // Get company
 async function getCompany({ id }) {
   try {
@@ -28,4 +40,4 @@ async function getUsers({ id }) {
   }
 }
 
-module.exports = { getCompany, getUsers };
+module.exports = { addCompany, getCompany, getUsers };
